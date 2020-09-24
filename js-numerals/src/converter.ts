@@ -18,10 +18,9 @@ const convertException = (number: number): string | undefined => {
 
 const convertUsingStrategy = (number: number): string | undefined => { 
     const digits: number = number.toString().length;
-    console.log(`Strategy, digits: ${digits}`);
     switch (digits) {
         case 1: return convertWithOneDigitStrategy(number)
-        case 2: return convertWithOneDigitStrategy(number);
+        case 2: return convertWithTwoDigitStrategy(number);
         case 3: return convertWithOneDigitStrategy(number);
         case 4: return convertWithOneDigitStrategy(number);
         case 5: return convertWithOneDigitStrategy(number);
@@ -30,10 +29,17 @@ const convertUsingStrategy = (number: number): string | undefined => {
     }
 }
 
-const convertWithOneDigitStrategy = (number: Number): string | undefined => {
+const convertWithOneDigitStrategy = (number: number): string | undefined => {
     const ones: Map<string, string> = dictionaryService.getOnes();
-    console.log(`Converting with One Digit Strategy... map: ${ones}`);
     return ones.get(number.toString());
+}
+
+const convertWithTwoDigitStrategy = (number: number): string | undefined => {
+        const tens: number = Math.floor(number / 10)*10;
+        const ones = number - tens;
+        const tensAsText = dictionaryService.getTens().get(tens.toString());
+        const onesAsText = dictionaryService.getOnes().get(ones.toString());
+        return  onesAsText == undefined ? `${tensAsText}` : `${tensAsText}-${onesAsText}`;
 }
   
 export default convert;
