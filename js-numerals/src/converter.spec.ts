@@ -32,10 +32,16 @@ describe('converter', () => {
 
     it('should convert four digit numbers', () => {
         expect(convert(1000)).to.equal("one thousand");
+        expect(convert(1001)).to.equal("one thousand and one");
         expect(convert(1200)).to.equal("one thousand two hundred");
         expect(convert(1201)).to.equal("one thousand two hundred and one");
         expect(convert(1212)).to.equal("one thousand two hundred and twelve");
         expect(convert(1234)).to.equal("one thousand two hundred and thirty-four");
         expect(convert(9999)).to.equal("nine thousand nine hundred and ninety-nine");
+    });
+
+    it('should convert five digit numbers', () => {
+        expect(convert(10000)).to.equal("ten thousand");
+        expect(convert(10001)).to.equal("ten thousand and one");
     });
 });

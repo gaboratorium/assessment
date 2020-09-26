@@ -18,12 +18,15 @@ const getNumberInText = (number: number): string => {
 
     console.log(`thousandsAsText: ${thousandsAsText}`);
 
-    if (thousandsAsText.length > 1) {
-        return thousandsAsText
-            .filter(word => word !== dictionaryService.getExceptions().get("0")) // remove zero from the end
-            .join(" ");
+    if (thousandsAsText.length == 1) { // e.g.: "and one"
+        if (!thousandsAsText[0].includes(dictionaryService.getScales()[1])) { // e.g.: "one hundred and one"
+            return thousandsAsText[0].replace('and ', '');
+        }
+        return thousandsAsText[0];
     } else {
-        return thousandsAsText.join(" ");
+        return thousandsAsText
+            .filter(word => word !== `and ${dictionaryService.getExceptions().get("0")}`) // remove zero from the end
+            .join(" ");
     }
 
 }
@@ -53,10 +56,12 @@ const getChunkAsText =(chunk: number, index: number): string => {
     const hundredScale = dictionaryService.getScales()[1];
     const hundredsText: string = getHundredsText(chunk, hundredScale); 
     const tensOrOnesText: string = getTensOrOnesText(chunk);
+
+    const isLastChunk = index == 0;
     
-    if (index == 0) {
+    if (isLastChunk) {
         if (hundredsText == '') {
-            return tensOrOnesText;
+            return `and ${tensOrOnesText}`;
         } else if (dictionaryService.getExceptions().get("0") == tensOrOnesText) {
             return hundredsText;
         } else {
