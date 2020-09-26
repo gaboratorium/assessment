@@ -14,8 +14,8 @@ export function getTens(): Map<string, string> {
     return getMapFor(dictionary["tens"]);
 }
 
-export function getUnits(): Map<string, string> {
-    return getMapFor(dictionary["units"]);
+export function getScales(): string[] {
+    return dictionary["scales"];
 }
 
 const getMapFor = (obj: Dictionary) => {

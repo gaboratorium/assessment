@@ -33,11 +33,12 @@
         "80": "eighty",
         "90": "ninety"
     },
-    "units": {
-        "hundred": "hundred",
-        "thousand": "thousand",
-        "million": "million",
-        "billion": "billion",
-        "trillion": "trillion"
-    }
+    "scales": [
+        "",
+        "hundred",
+        "thousand",
+        "million",
+        "billion",
+        "trillion"
+    ]
 }
