@@ -41,7 +41,13 @@ const getChunkAsText =(chunk: number, index: number): string => {
     const hundredsText: string = getHundredsText(chunk, hundredScale); 
     const tensOrOnesText: string = getTensOrOnesText(chunk);
     if (index == 0) {
-        return hundredsText == '' ? tensOrOnesText : `${hundredsText} and ${tensOrOnesText}`
+        if (hundredsText == '') {
+            return tensOrOnesText;
+        } else if (dictionaryService.getExceptions().get("0") == tensOrOnesText) {
+            return hundredsText;
+        } else {
+            return `${hundredsText} and ${tensOrOnesText}`;
+        }
     } else {
         return `${hundredsText} ${tensOrOnesText} ${scale}`;
     }

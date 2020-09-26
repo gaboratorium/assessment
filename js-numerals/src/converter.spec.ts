@@ -19,4 +19,14 @@ describe('converter', () => {
         expect(convert(39)).to.equal("thirty-nine");
         expect(convert(99)).to.equal("ninety-nine");
     });
+
+    it('should convert three digit numbers', () => {
+        expect(convert(100)).to.equal("one hundred");
+        expect(convert(101)).to.equal("one hundred and one");
+        expect(convert(112)).to.equal("one hundred and twelve");
+        expect(convert(200)).to.equal("two hundred");
+        expect(convert(222)).to.equal("two hundred and twenty-two");
+        expect(convert(500)).to.equal("five hundred");
+        expect(convert(578)).to.equal("five hundred and seventy-eight");
+    });
 });
