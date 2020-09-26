@@ -1,36 +1,50 @@
 import * as dictionaryService from './dictionary.service';
 
 export function convert(number: number): string {
-
-    if (dictionaryService.getExceptions().has(number.toString())) {
-        return dictionaryService.getExceptions().get(number.toString()) || 'NaN';
+    const isNumberAnException: boolean = dictionaryService.getExceptions().has(number.toString())
+    if (isNumberAnException) {
+        return getExceptionInText(number);
     } else {
         return getNumberInText(number);
     }
 }
 
-const getNumberInText = (number: number): string => {
-    const thousandsInReverse: number[] = getThousandsInReverse(number); // 23.425.123 => [123, 425, 23]
-    console.log(`thousands in reverse: ${thousandsInReverse}`)
-    const thousandsAsText: string[] = getThousandsAsText(thousandsInReverse);
-
-    console.log(`thousandsAsText ${thousandsAsText}`);
-
-    console.log(`thousandsAsText: ${thousandsAsText}`);
-
-    if (thousandsAsText.length == 1) { // e.g.: "and one"
-        if (!thousandsAsText[0].includes(dictionaryService.getScales()[1])) { // e.g.: "one hundred and one"
-            return thousandsAsText[0].replace('and ', '');
-        }
-        return thousandsAsText[0];
-    } else {
-        return thousandsAsText
-            .filter(word => word !== `and ${dictionaryService.getExceptions().get("0")}`) // remove zero from the end
-            .join(" ");
-    }
-
+const getExceptionInText = (number: number): string => {
+    return dictionaryService.getExceptions().get(number.toString()) || 'NaN';
 }
 
+const getNumberInText = (number: number): string => {
+    const thousandsInReverse: number[] = getThousandsInReverse(number);
+    const thousandsAsText: string[] = getThousandsAsText(thousandsInReverse);
+
+    if (thousandsAsText.length == 1) {
+        return getSingleChunkAsText(thousandsAsText[0]);
+    } else {
+        return getCompoundChunkAsText(thousandsAsText);
+    }
+}
+
+const getSingleChunkAsText = (chunk: string): string => {
+    const isHundredless = !chunk.includes(dictionaryService.getScales()[1])
+    if (isHundredless) {
+        return chunk.replace('and ', '');
+    } else {
+        return chunk;
+    }
+}
+
+const getCompoundChunkAsText = (thousandsAsText: string[]): string => {
+    return thousandsAsText
+    .filter(word => zeroFilter(word))
+    .join(" ");
+}
+
+const zeroFilter = (word: string ): boolean => {
+    return word !== `and ${dictionaryService.getExceptions().get("0")}`
+}
+
+// TODO: come up with a better name than 'thousands', decimals maybe?
+// E.g.: 23.425.123 => [123, 425, 23]
 const getThousandsInReverse = (number: number): number[] => {
     const thousands = [];
     while(number > 0) {
@@ -56,13 +70,14 @@ const getChunkAsText =(chunk: number, index: number): string => {
     const hundredScale = dictionaryService.getScales()[1];
     const hundredsText: string = getHundredsText(chunk, hundredScale); 
     const tensOrOnesText: string = getTensOrOnesText(chunk);
+    const isTensOrOnesTextZero = dictionaryService.getExceptions().get("0") == tensOrOnesText;
 
     const isLastChunk = index == 0;
     
     if (isLastChunk) {
         if (hundredsText == '') {
             return `and ${tensOrOnesText}`;
-        } else if (dictionaryService.getExceptions().get("0") == tensOrOnesText) {
+        } else if (isTensOrOnesTextZero) {
             return hundredsText;
         } else {
             return `${hundredsText} and ${tensOrOnesText}`;

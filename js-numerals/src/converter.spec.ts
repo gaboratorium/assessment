@@ -43,5 +43,14 @@ describe('converter', () => {
     it('should convert five digit numbers', () => {
         expect(convert(10000)).to.equal("ten thousand");
         expect(convert(10001)).to.equal("ten thousand and one");
+        expect(convert(10012)).to.equal("ten thousand and twelve");
+        expect(convert(10028)).to.equal("ten thousand and twenty-eight");
+        expect(convert(10050)).to.equal("ten thousand and fifty");
+        expect(convert(10100)).to.equal("ten thousand one hundred");
+        expect(convert(10101)).to.equal("ten thousand one hundred and one");
+        expect(convert(10111)).to.equal("ten thousand one hundred and eleven");
+        expect(convert(10151)).to.equal("ten thousand one hundred and fifty-one");
+        expect(convert(11001)).to.equal("eleven thousand and one");
+        expect(convert(11111)).to.equal("eleven thousand one hundred and eleven");
     });
 });
