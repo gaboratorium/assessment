@@ -10,8 +10,7 @@ export function convert(number: number): string {
 }
 
 const getNumberInText = (number: number): string => {
-    const thousandsInReverse: number[] = getThousandsInReverse(number); // 23.425.123 = [123, 425, 23]
-    console.log(`thousandsInReverse: ${thousandsInReverse}`)
+    const thousandsInReverse: number[] = getThousandsInReverse(number); // 23.425.123 => [123, 425, 23]
     const thousandsAsText: string[] = getThousandsAsText(thousandsInReverse);
     return thousandsAsText.join(" ");
 }
@@ -64,19 +63,14 @@ const getTensOrOnesText = (chunk: number): string => {
 }
 
 const getTwoDigitNumberAsText = (twoDigitNumber: number) => {
-    console.log(`Getting two digit numbersAsText...`)
-
     const tens = Math.floor(twoDigitNumber  / 10);
     const ones = (twoDigitNumber % 10);
 
     if (tens > 0 && ones > 0) {
-        console.log(`Getting two digit numbersAsText... first case`)
-        return `${dictionaryService.getTens().get(tens.toString())}-${dictionaryService.getOnes().get(ones.toString())}}`
+        return `${dictionaryService.getTens().get((tens*10).toString())}-${dictionaryService.getOnes().get(ones.toString())}`
     } else if (tens > 0) {
-        console.log(`Getting two digit numbersAsText... second case`)
-        return `${dictionaryService.getTens().get(tens.toString())}`
+        return `${dictionaryService.getTens().get((tens*10).toString())}`
     } else if (ones >= 0) {
-        console.log(`Getting two digit numbersAsText... third case`)
         return `${dictionaryService.getOnes().get(ones.toString())}`
     } else {
         return ``;
