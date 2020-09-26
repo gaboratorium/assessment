@@ -5,7 +5,7 @@ describe('converter', () => {
     it('should convert one digit numbers', () => {
         expect(convert(0)).to.equal("zero");
         expect(convert(1)).to.equal("one");
-        expect(convert(2)).to.equal("two");
+        expect(convert(5)).to.equal("five");
         expect(convert(9)).to.equal("nine");
     });
 
@@ -28,5 +28,14 @@ describe('converter', () => {
         expect(convert(222)).to.equal("two hundred and twenty-two");
         expect(convert(500)).to.equal("five hundred");
         expect(convert(578)).to.equal("five hundred and seventy-eight");
+    });
+
+    it('should convert four digit numbers', () => {
+        expect(convert(1000)).to.equal("one thousand");
+        expect(convert(1200)).to.equal("one thousand two hundred");
+        expect(convert(1201)).to.equal("one thousand two hundred and one");
+        expect(convert(1212)).to.equal("one thousand two hundred and twelve");
+        expect(convert(1234)).to.equal("one thousand two hundred and thirty-four");
+        expect(convert(9999)).to.equal("nine thousand nine hundred and ninety-nine");
     });
 });

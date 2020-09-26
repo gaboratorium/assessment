@@ -11,8 +11,21 @@ export function convert(number: number): string {
 
 const getNumberInText = (number: number): string => {
     const thousandsInReverse: number[] = getThousandsInReverse(number); // 23.425.123 => [123, 425, 23]
+    console.log(`thousands in reverse: ${thousandsInReverse}`)
     const thousandsAsText: string[] = getThousandsAsText(thousandsInReverse);
-    return thousandsAsText.join(" ");
+
+    console.log(`thousandsAsText ${thousandsAsText}`);
+
+    console.log(`thousandsAsText: ${thousandsAsText}`);
+
+    if (thousandsAsText.length > 1) {
+        return thousandsAsText
+            .filter(word => word !== dictionaryService.getExceptions().get("0")) // remove zero from the end
+            .join(" ");
+    } else {
+        return thousandsAsText.join(" ");
+    }
+
 }
 
 const getThousandsInReverse = (number: number): number[] => {
@@ -36,10 +49,11 @@ const getThousandsAsText = (thousandsInReverse: number[]): string[] => {
 }
 
 const getChunkAsText =(chunk: number, index: number): string => {
-    const scale = dictionaryService.getScales()[index]; 
+    const scale = dictionaryService.getScales()[index+1]; 
     const hundredScale = dictionaryService.getScales()[1];
     const hundredsText: string = getHundredsText(chunk, hundredScale); 
     const tensOrOnesText: string = getTensOrOnesText(chunk);
+    
     if (index == 0) {
         if (hundredsText == '') {
             return tensOrOnesText;
@@ -49,7 +63,13 @@ const getChunkAsText =(chunk: number, index: number): string => {
             return `${hundredsText} and ${tensOrOnesText}`;
         }
     } else {
+        if (hundredsText == '') {
+            return `${tensOrOnesText} ${scale}`;
+        } else if (tensOrOnesText == '') {
+            return `${hundredsText} ${scale}`;
+        } else {
         return `${hundredsText} ${tensOrOnesText} ${scale}`;
+        }
     }
 }
 
