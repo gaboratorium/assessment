@@ -4,6 +4,8 @@
   "description": "## Instructions",
   "main": "index.js",
   "scripts": {
+    "start": "tsc && copyfiles -u 1 src/index.html dist && live-server --entry-file=dist/index.html",
+    "build": "tsc && copyfiles -u 1 src/index.html dist",
     "test": "mocha -r ts-node/register src/**/*.spec.ts"
   },
   "author": "",
@@ -12,6 +14,8 @@
     "@types/chai": "^4.2.12",
     "@types/mocha": "^8.0.3",
     "chai": "^4.2.0",
+    "copyfiles": "^2.3.0",
+    "live-server": "^1.2.1",
     "mocha": "^8.1.3",
     "ts-node": "^9.0.0",
     "typescript": "^4.0.3"
