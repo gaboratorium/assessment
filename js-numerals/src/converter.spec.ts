@@ -84,5 +84,10 @@ describe('converter', () => {
     it('should convert 9 digit numbers', () => {
         expect(convert(100000000)).to.equal("one hundred million");
         expect(convert(111456789)).to.equal("one hundred eleven million four hundred fifty-six thousand seven hundred and eighty-nine");
-    })
+    });
+
+    it('should convert 10 digit numbers', () => {
+        expect(convert(1000000000)).to.equal("one billion");
+        expect(convert(1112345678)).to.equal("one billion one hundred twelve million three hundred forty-five thousand six hundred and seventy-eight");
+    });
 });
