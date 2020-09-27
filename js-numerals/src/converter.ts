@@ -1,11 +1,11 @@
 import * as dictionaryService from './dictionary.service';
 
-export function convert(number: number): string {
+export function convert(number: number, isSlang = false): string {
     const isNumberAnException: boolean = dictionaryService.getExceptions().has(number.toString())
     if (isNumberAnException) {
         return getExceptionAsText(number);
     } else {
-        return getNumberAsText(number);
+        return isSlang ? getNumberAsSlangText(number) : getNumberAsRegularText(number);
     }
 }
 
@@ -13,7 +13,35 @@ const getExceptionAsText = (number: number): string => {
     return dictionaryService.getExceptions().get(number.toString()) || 'NaN';
 }
 
-const getNumberAsText = (number: number): string => {
+const getNumberAsSlangText = (number: number): string => {
+    const isNumberSlangable = number.toString().length == 4 && number.toString()[1] !== '0';
+    if (isNumberSlangable) {
+        return getFourDigitNumberAsSlangText(number);
+    } else {
+        return getNumberAsRegularText(number);
+    }
+}
+
+const getFourDigitNumberAsSlangText = (number: number): string => {
+    const hundredScale = dictionaryService.getScales()[1];
+    const hundredsText = getHundredsTextFromFourDigitNumber(number);
+    const onesOrTensText = getTensOrOnesText(number);
+    return `${hundredsText} ${hundredScale} and ${onesOrTensText}`;
+}
+
+const getHundredsTextFromFourDigitNumber = (number: number): string => {
+    const numberAsText = number.toString();
+    const hundredsNumber = parseInt(`${numberAsText[0]}${numberAsText[1]}`);
+    return getTensOrOnesText(hundredsNumber);
+}
+
+const getOnesOrTensTextFromFourDigitNumber = (number: number): string => {
+    const numberAsText = number.toString();
+    const onesOrTensNumber = parseInt(`${numberAsText[2]}${numberAsText[3]}`);
+    return getTensOrOnesText(onesOrTensNumber);
+}
+
+const getNumberAsRegularText = (number: number): string => {
     const thousandsInReverse: number[] = getThousandsInReverse(number);
     const thousandsAsText: string[] = getThousandsAsText(thousandsInReverse);
 
@@ -35,8 +63,8 @@ const getSingleChunkAsText = (chunk: string): string => {
 
 const getCompoundChunkAsText = (thousandsAsText: string[]): string => {
     return thousandsAsText
-    .filter(word => !isZeroIncluded(word))
-    .join(" ");
+        .filter(word => !isZeroIncluded(word))
+        .join(" ");
 }
 
 const isZeroIncluded = (word: string ): boolean => {

@@ -90,4 +90,12 @@ describe('converter', () => {
         expect(convert(1000000000)).to.equal("one billion");
         expect(convert(1112345678)).to.equal("one billion one hundred twelve million three hundred forty-five thousand six hundred and seventy-eight");
     });
+
+    it('should convert 4 digit numbers in slang', () => {
+        expect(convert(1456, true)).to.equal("fourteen hundred and fifty-six");
+        expect(convert(1056, true)).to.equal("one thousand and fifty-six");
+        expect(convert(2256, true)).to.equal("twenty-two hundred and fifty-six");
+        expect(convert(9999, true)).to.equal("ninety-nine hundred and ninety-nine");
+        expect(convert(9099, true)).to.equal("nine thousand and ninety-nine");
+    });
 });
