@@ -74,4 +74,15 @@ describe('converter', () => {
         expect(convert(1000112)).to.equal("one million one hundred and twelve");
         expect(convert(1234567)).to.equal("one million two hundred thirty-four thousand five hundred and sixty-seven");
     })
+
+    it('should convert 8 digit numbers', () => {
+        expect(convert(10000000)).to.equal("ten million");
+        expect(convert(12000301)).to.equal("twelve million three hundred and one");
+        expect(convert(12345678)).to.equal("twelve million three hundred forty-five thousand six hundred and seventy-eight");
+    })
+
+    it('should convert 9 digit numbers', () => {
+        expect(convert(100000000)).to.equal("one hundred million");
+        expect(convert(111456789)).to.equal("one hundred eleven million four hundred fifty-six thousand seven hundred and eighty-nine");
+    })
 });
