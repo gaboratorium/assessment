@@ -4,16 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Converter</title>
-    <script src="./converter.js" defer></script>
+    <script src="bundle.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Converter</h1>
-    <form action="">
-        <label for="number"></label>
-        <input id="number"type="number">
-        <label for="isSlang"></label>
-        <input id="isSlang" type="checkbox">
-        <button>Translate</button>
-    </form>
+    <dic class="page">
+        <div class="page__panel">
+            <div class="page__panel-section">
+                <h1>Converter number to words</h1>
+                <form onsubmit="onSubmit(event)";return false">
+                    <label for="numberInput">Number</label>
+                    <input id="numberInput"type="number">
+                    <label for="isSlangInput">American slang?</label>
+                    <input id="isSlangInput" type="checkbox">
+                    <button>Translate</button>
+                </form>
+            </div>
+            <div class="page__panel-section page__panel-section--dark">
+                <div id="message" class="text--centered"></div>
+            </div>
+        </div>
+    </dic>
+
+    <script>
+        function onSubmit(event) {
+            event.preventDefault();
+            const number = document.getElementById('numberInput').value;
+            const isSlang = document.getElementById('isSlangInput').checked;
+            document.getElementById('message').innerHTML = myBundle.convert(number, isSlang);
+        }
+    </script>
 </body>
 </html>
