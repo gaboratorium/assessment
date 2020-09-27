@@ -53,4 +53,16 @@ describe('converter', () => {
         expect(convert(11001)).to.equal("eleven thousand and one");
         expect(convert(11111)).to.equal("eleven thousand one hundred and eleven");
     });
+
+    it('should convert six digit numbers', () => {
+        expect(convert(100000)).to.equal("one hundred thousand");
+        expect(convert(100001)).to.equal("one hundred thousand and one");
+        expect(convert(100012)).to.equal("one hundred thousand and twelve");
+        expect(convert(100020)).to.equal("one hundred thousand and twenty");
+        expect(convert(100022)).to.equal("one hundred thousand and twenty-two");
+        expect(convert(100122)).to.equal("one hundred thousand one hundred and twenty-two");
+        expect(convert(103122)).to.equal("one hundred three thousand one hundred and twenty-two");
+        expect(convert(143122)).to.equal("one hundred forty-three thousand one hundred and twenty-two");
+        expect(convert(140015)).to.equal("one hundred forty thousand and fifteen");
+    });
 });

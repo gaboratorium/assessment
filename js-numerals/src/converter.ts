@@ -3,17 +3,17 @@ import * as dictionaryService from './dictionary.service';
 export function convert(number: number): string {
     const isNumberAnException: boolean = dictionaryService.getExceptions().has(number.toString())
     if (isNumberAnException) {
-        return getExceptionInText(number);
+        return getExceptionAsText(number);
     } else {
-        return getNumberInText(number);
+        return getNumberAsText(number);
     }
 }
 
-const getExceptionInText = (number: number): string => {
+const getExceptionAsText = (number: number): string => {
     return dictionaryService.getExceptions().get(number.toString()) || 'NaN';
 }
 
-const getNumberInText = (number: number): string => {
+const getNumberAsText = (number: number): string => {
     const thousandsInReverse: number[] = getThousandsInReverse(number);
     const thousandsAsText: string[] = getThousandsAsText(thousandsInReverse);
 
@@ -35,12 +35,13 @@ const getSingleChunkAsText = (chunk: string): string => {
 
 const getCompoundChunkAsText = (thousandsAsText: string[]): string => {
     return thousandsAsText
-    .filter(word => zeroFilter(word))
+    .filter(word => isNotZero(word))
     .join(" ");
 }
 
-const zeroFilter = (word: string ): boolean => {
+const isNotZero = (word: string ): boolean => {
     return word !== `and ${dictionaryService.getExceptions().get("0")}`
+        && word !== `${dictionaryService.getExceptions().get("0")}`;
 }
 
 // TODO: come up with a better name than 'thousands', decimals maybe?
@@ -85,7 +86,7 @@ const getChunkAsText =(chunk: number, index: number): string => {
     } else {
         if (hundredsText == '') {
             return `${tensOrOnesText} ${scale}`;
-        } else if (tensOrOnesText == '') {
+        } else if (tensOrOnesText == '' || !isNotZero(tensOrOnesText)) {
             return `${hundredsText} ${scale}`;
         } else {
         return `${hundredsText} ${tensOrOnesText} ${scale}`;
