@@ -65,4 +65,8 @@ describe('converter', () => {
         expect(convert(143122)).to.equal("one hundred forty-three thousand one hundred and twenty-two");
         expect(convert(140015)).to.equal("one hundred forty thousand and fifteen");
     });
+
+    it('should convert seven digit numbers', () => {
+        expect(convert(1000000)).to.equal("one million");
+    })
 });

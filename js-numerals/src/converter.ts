@@ -35,13 +35,12 @@ const getSingleChunkAsText = (chunk: string): string => {
 
 const getCompoundChunkAsText = (thousandsAsText: string[]): string => {
     return thousandsAsText
-    .filter(word => isNotZero(word))
+    .filter(word => !isZeroIncluded(word))
     .join(" ");
 }
 
-const isNotZero = (word: string ): boolean => {
-    return word !== `and ${dictionaryService.getExceptions().get("0")}`
-        && word !== `${dictionaryService.getExceptions().get("0")}`;
+const isZeroIncluded = (word: string ): boolean => {
+    return word.includes(`${dictionaryService.getExceptions().get("0")}`);
 }
 
 // TODO: come up with a better name than 'thousands', decimals maybe?
@@ -86,7 +85,7 @@ const getChunkAsText =(chunk: number, index: number): string => {
     } else {
         if (hundredsText == '') {
             return `${tensOrOnesText} ${scale}`;
-        } else if (tensOrOnesText == '' || !isNotZero(tensOrOnesText)) {
+        } else if (tensOrOnesText == '' || isZeroIncluded(tensOrOnesText)) {
             return `${hundredsText} ${scale}`;
         } else {
         return `${hundredsText} ${tensOrOnesText} ${scale}`;
