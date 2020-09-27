@@ -2,14 +2,14 @@ import { expect } from 'chai';
 import { convert } from './converter';
 
 describe('converter', () => {
-    it('should convert one digit numbers', () => {
+    it('should convert 1 digit numbers', () => {
         expect(convert(0)).to.equal("zero");
         expect(convert(1)).to.equal("one");
         expect(convert(5)).to.equal("five");
         expect(convert(9)).to.equal("nine");
     });
 
-    it('should convert two digit numbers', () => {
+    it('should convert 2 digit numbers', () => {
         expect(convert(10)).to.equal("ten");
         expect(convert(11)).to.equal("eleven");
         expect(convert(12)).to.equal("twelve");
@@ -20,7 +20,7 @@ describe('converter', () => {
         expect(convert(99)).to.equal("ninety-nine");
     });
 
-    it('should convert three digit numbers', () => {
+    it('should convert 3 digit numbers', () => {
         expect(convert(100)).to.equal("one hundred");
         expect(convert(101)).to.equal("one hundred and one");
         expect(convert(112)).to.equal("one hundred and twelve");
@@ -30,7 +30,7 @@ describe('converter', () => {
         expect(convert(578)).to.equal("five hundred and seventy-eight");
     });
 
-    it('should convert four digit numbers', () => {
+    it('should convert 4 digit numbers', () => {
         expect(convert(1000)).to.equal("one thousand");
         expect(convert(1001)).to.equal("one thousand and one");
         expect(convert(1200)).to.equal("one thousand two hundred");
@@ -40,7 +40,7 @@ describe('converter', () => {
         expect(convert(9999)).to.equal("nine thousand nine hundred and ninety-nine");
     });
 
-    it('should convert five digit numbers', () => {
+    it('should convert 5 digit numbers', () => {
         expect(convert(10000)).to.equal("ten thousand");
         expect(convert(10001)).to.equal("ten thousand and one");
         expect(convert(10012)).to.equal("ten thousand and twelve");
@@ -54,7 +54,7 @@ describe('converter', () => {
         expect(convert(11111)).to.equal("eleven thousand one hundred and eleven");
     });
 
-    it('should convert six digit numbers', () => {
+    it('should convert 6 digit numbers', () => {
         expect(convert(100000)).to.equal("one hundred thousand");
         expect(convert(100001)).to.equal("one hundred thousand and one");
         expect(convert(100012)).to.equal("one hundred thousand and twelve");
@@ -66,7 +66,12 @@ describe('converter', () => {
         expect(convert(140015)).to.equal("one hundred forty thousand and fifteen");
     });
 
-    it('should convert seven digit numbers', () => {
+    it('should convert 7 digit numbers', () => {
         expect(convert(1000000)).to.equal("one million");
+        expect(convert(1000001)).to.equal("one million and one");
+        expect(convert(1000012)).to.equal("one million and twelve");
+        expect(convert(1000032)).to.equal("one million and thirty-two");
+        expect(convert(1000112)).to.equal("one million one hundred and twelve");
+        expect(convert(1234567)).to.equal("one million two hundred thirty-four thousand five hundred and sixty-seven");
     })
 });
