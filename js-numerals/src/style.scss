@@ -1,0 +1,103 @@
+$primary-color: #0289ee;
+$background-color: #263238;
+$panel-background-color: #eee;
+$panel-border-color: #9e9e9e;
+
+$panel-width: 350px;
+$default-padding: 15px;
+$default-border-radius: 3px;
+
+* {
+    box-sizing: border-box;
+}
+
+body, html {
+    background-color: $background-color;
+    padding: 0rem;
+    margin: 0rem;
+    font-family: 'Arial', 'sans-serif';
+}
+
+.page {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: start;
+    align-items: center;
+}
+
+.page__panel {
+    background-color: $panel-background-color;
+    border-radius: $default-border-radius;
+    border: 1px solid $panel-border-color;
+    margin: $default-padding;
+    width: 100%;
+    max-width: $panel-width;
+}
+
+.page__panel-section {
+    padding: $default-padding;
+    border-bottom: 1px solid $panel-border-color;
+    &:last-of-type {
+        border-bottom: none;
+    }
+}
+
+.page__panel-section--dark {
+    background-color: darken($panel-background-color, 10%);
+}
+
+.page__panel-section--tall {
+    min-height: 150px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.panel__panel-placeholder {
+    color: darken($panel-background-color, 50%);
+}
+
+.page__panel-title {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.page__form-input {
+    padding: $default-padding $default-padding/2;
+    display: block;
+    width: 100%;
+    font-size: 1rem;
+    margin-bottom: $default-padding;
+    border-radius: $default-border-radius;
+    border: 1px solid $panel-border-color;
+    outline: none;
+    &:focus {
+        border: 1px solid $primary-color
+    }
+}
+
+.page__form-row {
+    margin-bottom: $default-padding;
+}
+
+.page__form-button {
+    padding: $default-padding $default-padding/2;
+    display: block;
+    width: 100%;
+    background-color: $primary-color;
+    text-transform: uppercase;
+    font-weight: bold;
+    border: none;
+    border-radius: $default-border-radius;
+    color: white;
+    &:hover {
+        cursor: pointer;
+        background-color: lighten($primary-color, 5%);
+    }
+}
+

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Converter</title>
+    <script src="bundle.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <dic class="page">
+        <div class="page__panel">
+            <div class="page__panel-section">
+                <h1 class="page__panel-title">Numbers to Words</h1>
+                <form onsubmit="onSubmit(event)";return false">
+                    
+                    <input class="page__form-input" placeholder="Type in your number..." id="numberInput"type="number">
+                    <div class="page__form-row">
+                        <input id="isSlangInput" type="checkbox">
+                        <label for="isSlangInput">American slang for 4 digit numbers</label>
+                    </div>
+                    <button class="page__form-button">Convert</button>
+                </form>
+            </div>
+            <div class="page__panel-section page__panel-section--tall page__panel-section--dark">
+                <span id="message"><span class="panel__panel-placeholder">Type in your number then press "Convert".</span></span>
+            </div>
+        </div>
+    </dic>
+
+    <script>
+        function onSubmit(event) {
+            event.preventDefault();
+            const number = document.getElementById('numberInput').value;
+            const isSlang = document.getElementById('isSlangInput').checked;
+            document.getElementById('message').innerHTML = myBundle.convert(number, isSlang);
+        }
+    </script>
+</body>
+</html>

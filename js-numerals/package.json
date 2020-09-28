@@ -1,0 +1,25 @@
+{
+  "name": "js-numerals",
+  "version": "1.0.0",
+  "description": "## Instructions",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc && browserify dist/js/converter.js --standalone myBundle > dist/bundle.js && copyfiles -u 1 src/index.html dist && node-sass src/style.scss dist/style.css",
+    "start": "npm run-script build && opener dist/index.html",
+    "test": "mocha -r ts-node/register src/**/*.spec.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/chai": "^4.2.12",
+    "@types/mocha": "^8.0.3",
+    "browserify": "^16.5.2",
+    "chai": "^4.2.0",
+    "copyfiles": "^2.3.0",
+    "mocha": "^8.1.3",
+    "node-sass": "^4.14.1",
+    "opener": "^1.5.2",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.3"
+  }
+}
