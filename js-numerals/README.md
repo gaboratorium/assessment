@@ -23,3 +23,18 @@ For example:
 </pre>
 
 That's all.
+
+## Solution
+
+### Test online
+
+The application has been deployed to [https://gabor-js-numerals.web.app](https://gabor-js-numerals.web.app).
+
+
+### Test locally
+
+1. Clone this repo
+2. `npm install`
+3. `npm start`
+
+

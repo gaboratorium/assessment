@@ -25,8 +25,9 @@ const getNumberAsSlangText = (number: number): string => {
 const getFourDigitNumberAsSlangText = (number: number): string => {
     const hundredScale = dictionaryService.getScales()[1];
     const hundredsText = getHundredsTextFromFourDigitNumber(number);
-    const onesOrTensText = getTensOrOnesText(number);
-    return `${hundredsText} ${hundredScale} and ${onesOrTensText}`;
+    const onesOrTensText = getTensOrOnesText(number) === dictionaryService.getExceptions().get("0") ?
+        `` : ` and ${getTensOrOnesText(number)}`;
+    return `${hundredsText} ${hundredScale}${onesOrTensText}`;
 }
 
 const getHundredsTextFromFourDigitNumber = (number: number): string => {

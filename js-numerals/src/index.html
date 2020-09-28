@@ -11,17 +11,19 @@
     <dic class="page">
         <div class="page__panel">
             <div class="page__panel-section">
-                <h1>Converter number to words</h1>
+                <h1 class="page__panel-title">Numbers to Words</h1>
                 <form onsubmit="onSubmit(event)";return false">
-                    <label for="numberInput">Number</label>
-                    <input id="numberInput"type="number">
-                    <label for="isSlangInput">American slang?</label>
-                    <input id="isSlangInput" type="checkbox">
-                    <button>Translate</button>
+                    
+                    <input class="page__form-input" placeholder="Type in your number..." id="numberInput"type="number">
+                    <div class="page__form-row">
+                        <input id="isSlangInput" type="checkbox">
+                        <label for="isSlangInput">American slang for 4 digit numbers</label>
+                    </div>
+                    <button class="page__form-button">Convert</button>
                 </form>
             </div>
-            <div class="page__panel-section page__panel-section--dark">
-                <div id="message" class="text--centered"></div>
+            <div class="page__panel-section page__panel-section--tall page__panel-section--dark">
+                <span id="message"><span class="panel__panel-placeholder">Type in your number then press "Convert".</span></span>
             </div>
         </div>
     </dic>

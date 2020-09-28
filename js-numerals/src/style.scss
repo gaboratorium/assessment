@@ -1,8 +1,9 @@
+$primary-color: #0289ee;
 $background-color: #263238;
 $panel-background-color: #eee;
 $panel-border-color: #9e9e9e;
 
-$panel-width: 600px;
+$panel-width: 350px;
 $default-padding: 15px;
 $default-border-radius: 3px;
 
@@ -22,7 +23,7 @@ body, html {
     height: 100vh;
     display: flex;
     flex-flow: column nowrap;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
 }
 
@@ -44,10 +45,59 @@ body, html {
 }
 
 .page__panel-section--dark {
-    background-color: darker($panel-background-color, 5%);
+    background-color: darken($panel-background-color, 10%);
 }
 
-.text--centered {
+.page__panel-section--tall {
+    min-height: 150px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
     text-align: center;
+}
+
+.panel__panel-placeholder {
+    color: darken($panel-background-color, 50%);
+}
+
+.page__panel-title {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.page__form-input {
+    padding: $default-padding $default-padding/2;
+    display: block;
+    width: 100%;
+    font-size: 1rem;
+    margin-bottom: $default-padding;
+    border-radius: $default-border-radius;
+    border: 1px solid $panel-border-color;
+    outline: none;
+    &:focus {
+        border: 1px solid $primary-color
+    }
+}
+
+.page__form-row {
+    margin-bottom: $default-padding;
+}
+
+.page__form-button {
+    padding: $default-padding $default-padding/2;
+    display: block;
+    width: 100%;
+    background-color: $primary-color;
+    text-transform: uppercase;
+    font-weight: bold;
+    border: none;
+    border-radius: $default-border-radius;
+    color: white;
+    &:hover {
+        cursor: pointer;
+        background-color: lighten($primary-color, 5%);
+    }
 }
 

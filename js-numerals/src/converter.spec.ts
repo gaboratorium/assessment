@@ -97,5 +97,7 @@ describe('converter', () => {
         expect(convert(2256, true)).to.equal("twenty-two hundred and fifty-six");
         expect(convert(9999, true)).to.equal("ninety-nine hundred and ninety-nine");
         expect(convert(9099, true)).to.equal("nine thousand and ninety-nine");
+        expect(convert(9099, true)).to.equal("nine thousand and ninety-nine");
+        expect(convert(1100, true)).to.equal("eleven hundred");
     });
 });
