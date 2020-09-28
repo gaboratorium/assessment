@@ -37,4 +37,9 @@ The application has been deployed to [https://gabor-js-numerals.web.app](https:/
 2. `npm install`
 3. `npm start`
 
+### Approach
 
+- The base idea was to break down the given number into thousand modulars, because that's where the scale goes up.
+  - E.g.: 23.425.123 => (23), (425), (123), which is (twenty-three million) (four hundred twenty-five thousand) (one hundred and twenty-three)
+- The application also handles American slang
+  - E.g.: 1400 => fourteen hundred
